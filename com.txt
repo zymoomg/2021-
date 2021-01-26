@@ -1,0 +1,12 @@
+生成组件：
+添加新项：ATL简单对象
+类视图：接口添加方法
+regsvr32 C:\Users\张zsw\Desktop\project\软件体系结构\com\COM_test\x64\Debug\COM_Test.dll
+
+测试组件：
+cmd/以管理员
+注册表编辑器
+ctrl+b
+清除
+
+改组件

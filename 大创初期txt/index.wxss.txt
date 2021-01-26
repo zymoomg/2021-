@@ -1,0 +1,2 @@
+  /* 背景渐变:bottom:从下到上,右0.8向0透明渐变 */
+  background: -webkit-linear-gradient(bottom,rgba(0,0,0,0.5),rgba(0,0,0,0));

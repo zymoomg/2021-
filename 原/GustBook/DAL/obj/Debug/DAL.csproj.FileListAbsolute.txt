@@ -1,0 +1,5 @@
+E:\Work\WebFrom\GustBook\DAL\bin\Debug\GustBook.DAL.dll
+E:\Work\WebFrom\GustBook\DAL\bin\Debug\GustBook.DAL.pdb
+E:\Work\WebFrom\GustBook\DAL\obj\Debug\ResolveAssemblyReference.cache
+E:\Work\WebFrom\GustBook\DAL\obj\Debug\GustBook.DAL.dll
+E:\Work\WebFrom\GustBook\DAL\obj\Debug\GustBook.DAL.pdb

@@ -1,0 +1,16 @@
+E:\Work\WebFrom\GustBook\Model\bin\Release\GustBook.Model.dll
+E:\Work\WebFrom\GustBook\Model\bin\Release\GustBook.Model.pdb
+E:\Work\WebFrom\GustBook\Model\obj\Release\ResolveAssemblyReference.cache
+E:\Work\WebFrom\GustBook\Model\obj\Release\GustBook.Model.dll
+E:\Work\WebFrom\GustBook\Model\obj\Release\GustBook.Model.pdb
+F:\下载\GustBook\Model\bin\Release\GustBook.Model.dll
+F:\下载\GustBook\Model\bin\Release\GustBook.Model.pdb
+F:\下载\GustBook\Model\obj\Release\ResolveAssemblyReference.cache
+F:\下载\GustBook\Model\obj\Release\GustBook.Model.dll
+F:\下载\GustBook\Model\obj\Release\GustBook.Model.pdb
+C:\Users\pc\Desktop\原\GustBook\Model\bin\Release\GustBook.Model.dll
+C:\Users\pc\Desktop\原\GustBook\Model\bin\Release\GustBook.Model.pdb
+C:\Users\pc\Desktop\原\GustBook\Model\obj\Release\Model.csprojAssemblyReference.cache
+C:\Users\pc\Desktop\原\GustBook\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\原\GustBook\Model\obj\Release\GustBook.Model.dll
+C:\Users\pc\Desktop\原\GustBook\Model\obj\Release\GustBook.Model.pdb

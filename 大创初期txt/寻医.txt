@@ -1,0 +1,1318 @@
+1.doctor.js:
+// pages/doctor/doctor.js
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+   
+
+    imgUrls: [
+      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 500,
+
+    array1: [
+      { icon: '/pages/images/erke.png', text: '儿科' },
+      { icon: '/pages/images/fuke.png', text: '妇科' },
+      { icon: '/pages/images/bizi.png', text: '耳鼻咽喉科' },
+      { icon: '/pages/images/pifu.png', text: '皮肤科' },
+      { icon: '/pages/images/chanke.png', text: '产科' },
+      { icon: '/pages/images/neike.png', text: '内科' },
+      { icon: '/pages/images/yanke.png', text: '眼科' },
+      { icon: '/pages/images/guke.png', text: '骨科' },
+    ]
+  },
+  
+staticData: {
+  inputValue: ""
+ },
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options){
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+})
+
+
+doctor.wxml:
+<view class='page_row' bindtap="suo">  
+      <view class="search">  
+        <view class="df search_arr">  
+          <icon class="searchcion" size='20' type='search'></icon>  
+          <input class="" disabled placeholder="搜索附近医院，权威医生等" value="{{searchValue}}"/>  
+        </view>  
+      </view>  
+      <view class="btn-area">
+      <view class='sousuo'> <navigator url="/pages/doctor/doctorxinxi" hover-class="navigator-hover">搜索</navigator></view>  
+    </view>
+</view>
+    
+<swiper indicator-dots="{{indicatorDots}}"
+ autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+ <block wx:for="{{imgUrls}}" wx:key="swiper{{indexx}}">
+  <swiper-item>
+   <image src="{{item}}" class="slide-image"></image>
+  </swiper-item>
+ </block>
+</swiper>
+
+ <view class='frequentPanel'>
+    <view class='frequentTitle'>对症寻医</view>
+    <view class='frequentBlocks'>
+      <view class = 'box1' wx:for='{{array1}}' wx:key='array1_{{index}}' >
+        <navigator url="/pages/doctor/doctorxinxi" hover-class="navigator-hover">
+          <image src='{{item.icon}}'></image>
+        <text>{{item.text}}</text></navigator>
+      </view>
+    </view>
+    </view>
+
+
+
+<button class='btn1' bindtap="goToPage1">
+  <view><navigator url="/pages/doctor/shezhidinwei" hover-class="navigator-hover">附近医院推荐</navigator></view>
+</button>
+
+
+<button class='btn2' bindtap="goToPage1">
+  <view> <navigator url="/pages/doctor/doctorxinxi" hover-class="navigator-hover">医生信息介绍</navigator></view>
+      </button>
+
+<button class='btn3' bindtap="goToPage1">
+  <view> <navigator url="/pages/doctor/baomingrukou" hover-class="navigator-hover">志愿者服务</navigator></view>
+</button>
+
+<button class='btn4' bindtap="goToPage1">
+  <view> <navigator url="/pages/doctor/juankuan" hover-class="navigator-hover">病人求助</navigator></view>
+</button>
+
+
+
+doctro.wxss:
+.search{  
+  width: 80%;  
+}  
+.search_arr {  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+  margin-left: 20rpx;  
+}  
+.search_arr input{  
+  margin-left: 60rpx;  
+  height: 60rpx;  
+  border-radius: 5px;  
+}  
+.bc_text {  
+  line-height: 68rpx;  
+  height: 68rpx;  
+  margin-top: 34rpx;  
+}  
+  
+.sousuo {  
+  margin-left: 15rpx;  
+  width: 150%;  
+  line-height: 200%;  
+  text-align: center;  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+}  
+.page_row{  
+  display: flex;  
+  flex-direction: row  
+}  
+.searchcion {  
+  margin: 10rpx 10rpx 10rpx 10rpx;  
+  position: absolute;  
+  left:25rpx;  
+  z-index: 2;  
+  width: 20px;  
+  height: 20px;  
+  text-align: center;  
+} 
+
+.frequentPanel {
+  /*min-height: 600rpx; 最小高度*/
+  background-color: white; /*背景颜色为白色*/
+  /*margin: 20rpx 0; 上下外边距20rpx，左右0*/
+}
+.frequentTitle {
+  /*padding: 20rpx;四周内边距20rpx*/
+  /*border: 1rpx solid silver;1rpx宽的银色实线边框*/
+  font-size: 40rpx;/*字号30rpx大小*/
+  color: gray;/*字体颜色为灰色*/
+  margin-left: 20rpx;
+}
+.frequentBlocks {
+  display: flex;/*flex布局模型*/
+  flex-direction: row;/*水平布局*/
+  flex-wrap: wrap;/*允许换行*/
+}
+/*3-2-1 面板2：九宫格区域-方格样式*/
+.box1 {
+  /*border: 1rpx solid silver;1rpx宽的银色实线边框*/
+  display: flex;/*flex布局模型*/
+  flex-direction: column;/*垂直布局*/
+  align-items: center;/*水平方向居中*/
+  justify-content: center;/*垂直方向居中*/
+  width: 24%;/*宽度约占屏幕1/3*/
+  height: 200rpx;/*高度230rpx*/
+}
+/*3-2-2 面板2：方格内图标*/
+.box1 image {
+  width: 90rpx;/*宽度*/
+  height: 90rpx;/*高度*/
+}
+/*3-2-3 面板2：方格内文本*/
+.box1 text {
+  display: flex;
+  font-size: 30rpx;/*字号30rpx大小*/
+}
+
+.btn1 {
+  width:80%;
+  margin-top:130rpx;
+  background-color: rgb(85, 133, 141);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.btnImg1 {
+  margin-right: 8rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.btn2 {
+  width:80%;
+  margin-top:130rpx;
+  background-color: rgb(79, 155, 160);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnImg2 {
+  margin-right: 8rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.btn3 {
+  width:80%;
+  margin-top:130rpx;
+  background-color: rgb(82, 154, 163);
+  color: rgb(255, 255, 255);
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnImg3 {
+  margin-right: 8rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.btn4 {
+  width:80%;
+  margin-top:130rpx;
+  background-color: rgb(85, 164, 179);
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnImg4 {
+  margin-right: 8rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+
+baomingrukou.wxml:
+<view class="hr"></view>
+<view class='item'>
+  <view class="title"><navigator url="/pages/gerenxinxishouji/gerenxinxishouji" hover-class="navigator-hover">个人信息绑定</navigator></view>
+  <view class="detail2">
+    <text>></text>
+    </view>
+</view>
+
+<view class='item'>
+  <view class="title"><navigator url="/pages/doctor/baomingrukou" hover-class="navigator-hover">报名入口</navigator></view>
+  <view class="detail2">
+    <text>></text>
+  </view>
+</view>
+
+baomingrukou.wxss:
+.hr {
+  width: 100%;
+  height: 15px;
+  background-color: #f4f5f6;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+}
+
+
+doctorxinxi.wxml:
+<view class='page_row' bindtap="suo">  
+      <view class="search">  
+        <view class="df search_arr">  
+          <icon class="searchcion" size='20' type='search'></icon>  
+          <input class="" disabled placeholder="搜索附近医院，权威医生等" value="{{searchValue}}"/>  
+        </view>  
+      </view>  
+      <view class="btn-area">
+      <view class='sousuo'> <navigator url="/pages/doctor/doctorxinxi" hover-class="navigator-hover">搜索</navigator></view>  
+    </view>
+</view>
+
+doctorxinxi.wxss:
+.search{  
+  width: 80%;  
+}  
+.search_arr {  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+  margin-left: 20rpx;  
+}  
+.search_arr input{  
+  margin-left: 60rpx;  
+  height: 60rpx;  
+  border-radius: 5px;  
+}  
+.bc_text {  
+  line-height: 68rpx;  
+  height: 68rpx;  
+  margin-top: 34rpx;  
+}  
+  
+.sousuo {  
+  margin-left: 15rpx;  
+  width: 150%;  
+  line-height: 200%;  
+  text-align: center;  
+  border: 1px solid #d0d0d0;  
+  border-radius: 10rpx;  
+}  
+.page_row{  
+  display: flex;  
+  flex-direction: row  
+}  
+.searchcion {  
+  margin: 10rpx 10rpx 10rpx 10rpx;  
+  position: absolute;  
+  left:25rpx;  
+  z-index: 2;  
+  width: 20px;  
+  height: 20px;  
+  text-align: center;  
+} 
+
+
+
+shezhidinwei.js:
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    latitude:31.14,
+    longitude:118.22,
+    markers:[{
+      latitude:31.14,
+    longitude:118.22,
+    iconPath:'../image/位置.png',
+    label:{
+      content:'我的位置',
+      corlor:'#0000FF',
+      bgColor:'#FFFF00',
+      fontSize:20
+    }
+    },
+    {
+      latitude:31.14,
+      longitude:118.22,
+      iconPath:'../image/位置.png',
+    
+    }]
+  },
+  chooseLocation:function(){
+    wx.chooseLocation({
+      success:function(res){
+        console.log(res)
+      },
+    })
+  },
+  openLocation:function(){
+    wx.getLocation({
+      type:'gcj02',
+      success:function(res){
+        wx.openLocation({
+          latitude:res.latitude,
+          longitude:res.longitude,
+          scale:28,
+        })
+      },
+    })
+  },
+ 
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})
+
+
+shezhidinwei.wxml:
+<view class="box">
+<view class="title">位置和地图</view>
+<view>
+<map id="myMap" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location></map>
+</view>
+<view class='btnLayout'>
+  <button bindtap="chooseLocation" type="primary">选择位置</button>
+  <button bindtap="openLocation" type="primary">打开位置</button>
+</view>
+</view>
+
+shezhidinwei.wxss:
+map{
+  margin:10px 0px;
+  width:100%;
+  height:320px;
+}
+.btnLayout{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+}
+
+
+fenlei.js:
+const App = getApp()
+Page({
+ 
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    // 自定义顶部导航
+    navHeight: App.globalData.navHeight,
+    navTop: App.globalData.navTop,
+    // 图标
+    leftIcon: "../../../img/icon/icon-医院.png",
+    searchIcon: "../../../img/icon/icon-医院.png",
+    eyeIconOne: "../../../img/icon/icon-eye-医院.png",
+    eyeIcon: "../../../img/icon/icon-医院.png",
+    upperLeftArrow: "../../../img/icon/icon-upper-left-医院.png",
+    recommend: [ //热门推荐
+      {
+        title: "妇科"
+      },
+      {
+        title: "儿科"
+      },
+      {
+        title: "男科"
+      },
+      {
+        title: "皮肤性病科"
+      },
+      {
+        title: "内科"
+      },
+      {
+        title: "产科"
+      },
+      {
+        title: "外科"
+      },
+      {
+        title: "中医科"
+      },
+      {
+        title: "耳鼻咽喉科"
+      },
+      {
+        title: "更多"
+      }
+    ],
+    historyStorage: [],        //历史搜索
+    historyStorageShow: false,
+    falg: true,         //换一批
+    hotsearch1: [{ title: "短裤" }, { title: "背带裙" }, { title: "牛仔裤男" }, { title: "运动 休闲男鞋" }, { title: "蕾丝连衣裙" }, { title: "电视" }, { title: "长裙" }, { title: "oppo" }, { title: "蓝牙耳机" }, { title: "女包" }, { title: "格力空调" }, { title: "魅族" }],
+    hotsearch2: [{ title: "平板电脑" }, { title: "耳机" }, { title: "男鞋" }, { title: "iPhone" }, { title: "蕾丝连衣裙" }, { title: "电视" }, { title: "长裙" }, { title: "oppo" }, { title: "蓝牙耳机" }, { title: "女包" }, { title: "格力空调" }, { title: "魅族" }],
+    // searchresult: false,
+    inputValue: "",        //输入框输入的值
+    replaceValue: "",     //替换输入框的值
+    eye: true,        //显示隐藏
+    searchresult: false,
+    searchResult: [{ result: "苹果手机" }, { result: "手机支架" }, { result: "手机自营" }, { result: "手机套" }, { result: "手机膜" }, { result: "手机卡" }, { result: "手机报" }, { result: "苹果手机壳" }, { result: "手机车载支架" }]//虚拟的查询结果
+  },
+  // 点击返回上一级
+  goBack: function() {
+    let pages = getCurrentPages();      //获取小程序页面栈
+    let beforePage = pages[pages.length - 2];       //获取上个页面的实例对象
+    beforePage.setData({
+      txt: "修改数据了"
+    })
+    beforePage.goUpdate();           //触发上个页面自定义的go_update()方法
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  /**
+   * 获取顶部固定高度
+   */
+  attached: function() {
+    this.setData({
+      navHeight: App.globalData.navHeight,
+      navTop: App.globalData.navTop,
+    })
+  },
+  /**
+   * 换一批操作
+   */
+  changeother: function () {
+    this.setData({
+      falg: !this.data.falg
+    })
+  },
+ 
+  /**
+   * 热门搜索显示隐藏
+   */
+  reye: function () {
+    this.setData({
+      eye: !this.data.eye
+    })
+  },
+ 
+  /**
+   * 清除
+   */
+  remove: function () {
+    var _this = this
+    wx: wx.showModal({
+      content: '确认清除所有历史记录?',
+      success: function (res) {
+        if (res.confirm) {
+          wx: wx.removeStorage({
+            key: 'historyStorage',
+            success: function (res) {
+              _this.setData({
+                historyStorage: []
+              })
+              wx.setStorageSync("historyStorage", [])
+            },
+          })
+        } else {
+          console.log("点击取消")
+        }
+      },
+    })
+  },
+ 
+ 
+  /**
+   * 获取input的值
+   */
+  getInputValue(e) {
+    // console.log("获取value值",e.detail)   // {value: "ff", cursor: 2}
+    this.setData({
+      inputValue: e.detail.value
+    })
+    this.setData({
+      searchresult: true,
+    })
+  },
+ 
+  /**
+   * 点击搜索提交跳转并存储历史记录
+   */
+  searchbegin: function (e) {
+    let _this = this
+    var data = e.currentTarget.dataset;
+    _this.data.replaceValue = e.currentTarget.dataset.postname
+    // _this.data.replaceValue = 
+    wx: wx.setStorage({
+      key: 'historyStorage',
+      data: _this.data.historyStorage.concat(_this.data.inputValue),
+      data: _this.data.historyStorage.concat(_this.data.replaceValue)
+    })
+    // console.log(_this.data.inputValue)
+    // console.log(_this.data.historyStorage)
+    wx.navigateTo({
+      url: '../../commodity/commodity-search-list/index?postName=' + data['postname']
+    })
+  },
+ 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    // 历史搜索
+    let that = this
+    wx.getStorage({
+      key: 'historyStorage',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          historyStorageShow: true,
+          historyStorage: res.data
+        })
+      }
+    })
+  },
+  //点击进入详情页
+  goToList: function (e) {
+    
+  },
+  goUpdate: function() {
+    this.onLoad()
+    console.log("我更新啦")
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+ 
+  },
+ 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+ 
+  },
+ 
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+ 
+  },
+ 
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+ 
+  },
+ 
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+ 
+  },
+ 
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+ 
+  },
+ 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+ 
+  }
+})
+
+
+
+fenlei.wxml:
+<view class="navbar custom-class" style='height:{{navHeight}}px;'>
+  <view class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;'>
+    <image style="width: 1rem; height: 1.2rem; " src="{{leftIcon}}" catchtap="goBack"></image>
+  </view>
+  <view class='navbar-title' style='top:{{navTop}}px'>
+    <view class="search-input">
+      <span class="search-con">
+        <view class="center-30f2b4d">
+          <!-- 自定义区域 -->
+          <image class="icon" src="{{searchIcon}}" catchtap="searchbegin" data-postname="{{inputValue}}"></image>
+          <input class="search-size" confirm-type="search" value="{{inputValue}}" type="text" bindinput="getInputValue" placeholder="搜索品牌或商品" placeholder-class="phcolor"></input>
+        </view>
+      </span>
+    </view>
+  </view>
+</view>
+<!-- 自定义顶部导航 E -->
+<view class="read-in">
+  <!-- 最近搜索 S -->
+    <view class="headline" wx:if="{{historyStorage.length!=0}}" hidden="{{historyStorageShow?false:true}}">
+      <view class="head-headline justify">
+        <view class="headline-size">最近搜索</view>
+        <view class="right size" catchtap="remove">清除</view>
+      </view>
+      <!-- 最近搜索内容 S -->
+      <view class="lately-main">
+        <view class="chunk" wx:for="{{historyStorage}}" wx:key="index" bindtap='routeToSearchResPage' data-index='{{index}}'>
+          <text>{{item}}</text>
+        </view>
+      </view>
+      <!-- 最近搜索内容 E -->
+    </view>
+    <!-- 最近搜索 E -->
+    <!-- 热门搜索 S -->
+    <view class="headline">
+      <view class="head-headline">
+        <view class="headline-size">热门搜索</view> 
+        <view class="liang">
+          <view class="low-bo">
+            <image class="icon-eye low-bottom" bindtap="reye" src="{{eyeIconOne}}" hidden="{{!eye}}"></image> 
+            <image class="icon-eye low-bottom" bindtap="reye" src="{{eyeIcon}}" hidden="{{eye}}"></image> 
+          </view>
+          <view class="right size" bindtap="changeother">换一批</view>
+        </view>
+      </view>
+      <!-- 热门推荐内容 S -->
+      <view class="lately-main" hidden="{{eye?false:true}}">
+        <view class="chunk" wx:for="{{falg ? hotsearch1 : hotsearch2}}" wx:key="index">
+          <text>{{item.title}}</text>
+        </view>
+      </view>
+      <!-- 热门推荐内容 E -->
+    </view>
+    <!-- 热门搜索 E -->
+</view>
+ 
+ 
+<!--搜索结果-->
+<view class="searchresult" wx:if="{{inputValue != ''}}" hidden="{{searchresult?false:true}}">
+  <view class="result" wx:for="{{searchResult}}" catchtap="searchbegin" wx:key="index" bindtap="getInputValue" data-postname="{{item.result}}">
+    <view>{{item.result}}</view>
+    <image src="{{upperLeftArrow}}"></image>
+  </view>
+</view>
+
+
+fenlei.wxss:
+page {
+  background: white;
+}
+.navbar {
+width: 100%;
+overflow: hidden;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 10;
+flex-shrink: 0;
+background-color: white;
+}
+
+.navbar-title {
+width: 100%;
+box-sizing: border-box;
+padding-left: 40px;
+padding-right: 120px;
+height: 33px;
+line-height: 33px;
+position: fixed;
+left: 0;
+z-index: 10;
+color: #333;
+font-size: 16px;
+font-weight: bold;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+display: flex;
+}
+
+.navbar-action-wrap {
+display: -webkit-flex;
+display: flex;
+-webkit-box-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+left: 10px;
+z-index: 11;
+line-height: 1;
+padding-top: 4px;
+padding-bottom: 4px;
+position: fixed;
+}
+
+.navbar-action-group {
+border-radius: 20px;
+overflow: hidden;
+}
+
+.navbar-action_item {
+padding: 3px 0;
+color: #333;
+}
+
+.navbar-action-group .navbar-action_item {
+border-right: 1px solid #f0f0f0;
+padding: 3px 14px;
+}
+
+.navbar-action-group .last {
+border-right: none;
+}
+
+.navbar-title-size {
+font-size: 10px;
+margin-right: 20rpx;
+align-self: center;
+margin: 0 auto;
+}
+
+.navbar-title-size.active {
+color: red;
+border-bottom: 2px solid red;
+}
+
+.scroll-box {
+position: absolute;
+height: 100%;
+}
+
+.search-input {
+width: 100%;
+height: 28px;
+line-height: 28px;
+background: #f6f6f6;
+border-radius: 30rpx;
+/* margin-top: 2px; */
+font-size: 25rpx;
+}
+
+.search-con {
+display: flex;
+align-items: center;
+}
+.search-con .center-30f2b4d {
+height: 28px;
+line-height: 28px;
+flex: 1;
+display: flex;
+align-items: center;
+}
+.search-con .center-30f2b4d .icon {
+width: 15px;
+height: 15px;
+align-self: center;
+margin: 0 10px;
+}
+.search-con .center-30f2b4d .search-size {
+width: 60%; 
+font-size: 12px;
+font-family: "微软雅黑";
+}
+.phcolor {
+color: #D3D3D3;
+}
+/* nav E */
+/* 标题部分 */
+.read-in {
+margin-top: 64px;
+padding: 0 40rpx;
+}
+.headline {
+padding-top: .5rem;
+}
+
+.head-headline {
+width: 100%;
+height: 45rpx;
+position: relative;
+display: flex;
+}
+.liang {
+width: 100%;
+display: flex;
+justify-content: space-between;
+}
+.justify {
+display: flex;
+justify-content: space-between;
+}
+.headline-size {
+width: 185rpx;
+font-size: 35rpx;
+float: left;
+}
+
+.low-bo {
+/* flex: 1; */
+height: 45rpx;
+position: relative;
+align-self: center;
+}
+.low-bottom {
+/* position:absolute; */
+bottom:0px;
+padding:0 10rpx  0;
+margin:0px;
+}
+.size {
+/* flex: 1; */
+float: right;
+font-size: 30rpx;
+color: #d4237a;
+/* position: absolute; */
+bottom:0px;
+align-self: center;
+
+}
+
+/* 内容部分 */
+.lately-main {
+margin-top: 20rpx;
+overflow: hidden; 
+}
+.lately-main .chunk {
+display: inline-block;
+font-size: 25rpx;
+line-height: 20rpx;
+padding: 20rpx 20rpx;
+background: #f5f5f5;
+margin-right: 30rpx;
+border: 1px solid #DCDCDC;
+border-radius: 30rpx;
+margin-bottom: 30rpx;
+}
+
+.searchresult {
+margin-top: 20px; 
+position: absolute;
+top: 55px;
+left: 0;
+width: 100%;
+background: #fff;
+}
+.result {
+height: 50px;
+line-height: 50px;
+text-align: left;
+border-bottom: 1px solid #eee;
+padding: 0 30rpx;
+color: #333;
+font-family: "微软雅黑";
+font-size: 30rpx;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.result image {
+width: 50rpx;
+height: 50rpx;
+}
+
+
+gerenxinxishouij.js:
+function Person(name,sex,birthPlace,birthDay,height,weight)
+{
+  this.name=name;
+  this.sex=sex;
+  this.birthPlace=birthPlace;
+  this.birthDay=birthDay;
+  this.height=height;
+  this.weight=weight;
+}
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    flag:true,
+    gender:["男","女"]
+  },
+  nameInput:function(e){
+    this.name=e.detail.value
+  },
+  pickerSex:function(e){
+    this.sex=this.data.gender[e.detail.value]
+    this.setData({
+      sex:this.sex
+    })
+  },
+  pickerRegion:function(e){
+    this.birthPlace=e.detail.value;
+    this.setData({
+      birthPlace:this.birthPlace
+    })
+  },
+  pickerDate:function(e){
+    this.birthDay=e.detail.value;
+    this.setData({
+      birthDay:this.birthDay
+    })
+  },
+  heightInput:function(e){
+    this.height=e.detail.value
+  },
+  weight:function(e){
+    this.weight=e.detail.value
+  },
+  showMessage:function(e){
+    var p=new Person(this.name,this.sex,this.birthPlace,this.birthDay,this.height,this.weight)
+    this.setData({
+      flag:false,
+      person:p
+    })
+  },
+
+  
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})
+
+
+gerenxinxishouji.wxml:
+<view class="box">
+<view class='title'>个人信息填写</view>
+<view class='lineLayout'>
+  <view>姓名:</view>
+  <input placeholder='请输入姓名' bindinput="nameInput"></input>
+</view>
+<picker bindchange="pickerSex" range="{{gender}}">
+  <view>性别:{{sex}}</view>
+</picker>
+<picker mode='region' bindchange='pickerRegion'>
+  <view>籍贯:{{birthPlace}}</view>
+</picker>
+<picker mode="date" start="1800-01-01" end="2999-12-12" bindchange="pickerDate">
+  <view>出生日期:{{birthDay}}</view>
+</picker>
+<view class='lineLayout'>
+  <view>身高(cm):</view>
+  <input type='number' bindinput="heightInput" placeholder='请输入身高'></input>
+</view>
+<view class='lineLayout'>
+  <view>体重(kg):</view>
+  <input type='digit' bindinput="weightInput" placeholder='请输入体重'></input>
+</view>
+<button type='primary' bindtap="showMessage">显示个人信息</button>
+
+<view hidden='{{flag}}'>
+  <view class="content-item">姓名:{{person.name}}</view>
+  <view class="content-item">性别:{{person.sex}}</view>
+  <view class="content-item">籍贯:{{person.birthPlace}}</view>
+  <view class="content-item">出生日期:{{person.birthDay}}</view>
+  <view class="content-item">身高:{{person.height}}</view>
+  <view class="content-item">体重:{{person.weight}}</view>
+</view>
+</view>
+
+
+gerenxinxishouji.wxss:
+.lineLayout{
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
+}
+input{
+  height:30px;
+  border-bottom:2px solid silver;
+  margin:10rpx 0;
+}
+picker,button{
+  margin:15px 0;
+}
+
+
+
+app.json:
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/test/test",
+    "pages/images/images",
+    "pages/doctor/doctor",
+    "pages/medicine/medicine",
+    "pages/utils/util",
+    "pages/baomingrukou/baomingrukou",
+    "pages/dinwei/dinwei",
+    "pages/juankuan/juankuan",
+    "pages/doctorxinxi/doctorxinxi",
+    "pages/doctor/doctorxinxi",
+    "pages/doctor/baomingrukou",
+    "pages/doctor/juankuan",
+    "pages/doctor/shezhidinwei",
+    "pages/shezhidinwei/shezhidinwei",
+    "pages/fenlei/fenlei",
+    "pages/doctor/doctorxinxi/fenlei",
+    "pages/gerenxinxishouji/gerenxinxishouji",
+    "pages/doctor/baomingrukou/gerenxinxishouji",
+    "pages/category/category",
+    "pages/introduction/introduction",
+    "pages/medicine/gouyao1",
+    "pages/medicine/sousuo",
+    "pages/medicine/zixun",
+    "pages/mypage/mypage",
+    "pages/mypage/goin/goin",
+    "pages/mypage/goin/zhuCe/zhuCe",
+    "pages/mypage/setting/setting",
+    "pages/mypage/setting/safe/safe",
+
+    "pages/mypage/user/user",
+    "pages/mypage/user/change/change",
+    "pages/mypage/VIP/VIP",
+    "pages/mypage/VIP/freeConsultation/freeConsultation",
+    "pages/mypage/VIP/market/market",
+    "pages/mypage/VIP/parentingKnowledge/parentingKnowledge",
+    "pages/mypage/VIP/telephoneConsultation/telephoneConsultation"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#B0E0E6",
+    "navigationBarTitleText": "守卫宁+",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要你的位置信息哦"
+    }
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#000",
+    "backgroundColor": "#f5f5f5",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "喵喵首页",
+        "iconPath": "pages/images/首页.png",
+        "selectedIconPath": "pages/images/首页.png"
+      },
+      {
+        "pagePath": "pages/doctor/doctor",
+        "text": "寻医",
+        "iconPath": "pages/images/医生.png",
+        "selectedIconPath": "pages/images/医生.png"
+      },
+      {
+        "pagePath": "pages/medicine/medicine",
+        "text": "问药",
+        "iconPath": "pages/images/tab药丸.png",
+        "selectedIconPath": "pages/images/tab药丸.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "喵喵日志",
+        "iconPath": "pages/images/记录.png",
+        "selectedIconPath": "pages/images/记录.png"
+      },
+      {
+        "pagePath": "pages/mypage/mypage",
+        "text": "我的",
+        "iconPath": "pages/images/我的.png",
+        "selectedIconPath": "pages/images/我的.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
+
+
+
+
+
+
+还有一些没有写功能的页面：
+dinwei
+juankuan
+
+
+
+
+
+
+
+

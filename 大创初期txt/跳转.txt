@@ -1,0 +1,6 @@
+<view>
+    <navigator  url="/pages/logs/logs"open-type="switchTab" hover-class="changestyle">页面跳转目录，可以返回</navigator>
+</view>    
+<view>
+    <navigator  url="/pages/justtest/justtest"hover-class="changestyle">页面跳转，可以返回</navigator>
+</view>

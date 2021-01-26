@@ -1,0 +1,5 @@
+E:\Work\WebFrom\GustBook\DBUtility\bin\Debug\GustBook.DBUtility.dll
+E:\Work\WebFrom\GustBook\DBUtility\bin\Debug\GustBook.DBUtility.pdb
+E:\Work\WebFrom\GustBook\DBUtility\obj\Debug\ResolveAssemblyReference.cache
+E:\Work\WebFrom\GustBook\DBUtility\obj\Debug\GustBook.DBUtility.dll
+E:\Work\WebFrom\GustBook\DBUtility\obj\Debug\GustBook.DBUtility.pdb

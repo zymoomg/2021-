@@ -1,0 +1,4 @@
+ motto: '欢迎来到喵喵的小程序，一起加油哦~',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo')

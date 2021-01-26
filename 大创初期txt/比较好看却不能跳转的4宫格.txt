@@ -1,0 +1,11 @@
+<!-- 四宫格功能应用 -->
+<view class='content1'>
+      <view class='content-item' wx:for="{{contentImgUrls}}" wx:key="url" wx:for-item="item">
+        <!-- 图片 -->
+        <image src="{{item.url}}" class="slide-image" mode='scaleToFill'/>
+        <!-- 图片上的文字说明 -->
+        <view class='content-item-title'>
+          <text>{{item.title}}</text>
+        </view>
+      </view>
+    </view>

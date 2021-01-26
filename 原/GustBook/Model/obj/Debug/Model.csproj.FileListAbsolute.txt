@@ -1,0 +1,5 @@
+E:\Work\WebFrom\GustBook\Model\bin\Debug\GustBook.Model.dll
+E:\Work\WebFrom\GustBook\Model\bin\Debug\GustBook.Model.pdb
+E:\Work\WebFrom\GustBook\Model\obj\Debug\ResolveAssemblyReference.cache
+E:\Work\WebFrom\GustBook\Model\obj\Debug\GustBook.Model.dll
+E:\Work\WebFrom\GustBook\Model\obj\Debug\GustBook.Model.pdb

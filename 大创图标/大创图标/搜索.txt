@@ -1,0 +1,12 @@
+doctor.wxml
+<view class='page_row' bindtap="suo">  
+      <view class="search">  
+        <view class="df search_arr">  
+          <icon class="searchcion" size='20' type='search'></icon>  
+          <input class="" disabled placeholder="搜索附近医院，权威医生等" value="{{searchValue}}"/>  
+        </view>  
+      </view>  
+      <view class="btn-area">
+      <view class='sousuo'> <navigator url="/pages/doctor/doctorxinxi" hover-class="navigator-hover">搜索</navigator></view>  
+    </view>
+</view>

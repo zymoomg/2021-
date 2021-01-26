@@ -1,0 +1,796 @@
+#include<iostream>
+#include<fstream>
+#include<iomanip>
+#include<string>
+const int capacity = 2000;
+using namespace std;
+class Article
+{
+public:
+	int number;
+	string title;
+	string author;
+	int graderank;
+public:
+	Article(int num = 0, string tit = " ", string aut = " ", int gr = 0) :number(num), title(tit), author(aut), graderank(gr) {};
+	void input();
+	void output();
+	int getnumber() { return number; }
+	string gettitle() { return title; }
+	string getauthor() { return author; }
+	int getgraderank() { return graderank; }
+};
+class Book :public Article
+{
+public:
+	string press;
+	int ISBN;
+	int page;
+public:
+	Book(int num = 0, string tit = " ", string aut = " ", int gr = 0, string pre = " ", int isbn = 0, int pg = 0) :
+		Article(num, tit, aut, gr), press(pre), ISBN(isbn), page(pg) {};
+	void input();
+	void output();
+	string getpress() { return press; }
+	int getISBN() { return ISBN; }
+	int getpage() { return page; }
+};
+class Bookinfo
+{
+protected:
+	Book bk[capacity];
+	int amount;
+
+public:
+	Bookinfo() { amount = 0; }
+	void add();
+	void deletes();
+	void show();
+	void compile();
+	void search();
+	void save();
+	void load();
+};
+void Book::input()
+{
+	cout << "plz enter the number";
+	cin >> number;
+	cout << "plz enter the title";
+	cin >> title;
+	cout << "plz enter the author";
+	cin >> author;
+	cout << "plz enter the gr";
+	cin >> graderank;
+	cout << "plz enter the press";
+	cin >> press;
+	cout << "plz enter the page";
+	cin >> page;
+	cout << "plz enter the ISBN";
+	cin >> ISBN;
+}
+void Book::output()
+{
+	cout << "编号：" << number;
+	cout << "标题：" << title;
+	cout << "作者：" << author;
+	cout << "评级：" << graderank;
+	cout << "出版社：" << press;
+	cout << "页数：" << page;
+	cout << "ISBN码：" << ISBN;
+}
+void Bookinfo::add()
+{
+	if (amount >= capacity) { cout << "WARNING!媒体库已满！" << endl; return; }
+	Book books;
+	cout << "请输入添加书籍的信息" << endl;
+	books.input();
+	for (int i = 0; i < amount; i++)
+		if (books.getnumber() == bk[i].getnumber())
+		{
+			cout << "该编号书籍已存在！" << endl;
+			return;
+		}
+
+	bk[amount] = books;
+	amount += 1;
+	cout << "添加成功！" << endl;
+}
+void Bookinfo::deletes()
+{
+	if (amount = 0) { cout << "当前没有书籍记录！" << endl; return; }
+	cout << "请输入你要删除的编号！" << endl;
+	int num;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (bk[i].getnumber() == num)
+		{
+			cout << "是否删除？" << endl;
+			cout << "1.是 2.否" << endl;
+			int choice1;
+			cin >> choice1;
+			switch (choice1)
+			{
+			case 1:
+			{
+				for (int j = i; j < amount - 1; j++)
+				{
+					bk[j] = bk[j + 1];
+					cout << "删除成功！" << endl;
+					amount--;
+				}
+			}; break;
+			case 2:return;
+			default:cout << "不存在此选项！" << endl; break;
+			}return;
+		}
+	}
+	cout << "记录为空！" << endl;
+}
+void Bookinfo::search()
+{
+	if (amount == 0) { cout << "当前无书籍记录！" << endl; return; }
+	int choice;
+	cout << "请选择查询方式：1.编号查询 2.标题查询 3.作者查询 " << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+	{
+		cout << "请输入要查询的编号：" << endl;
+		int number;
+		cin >> number;
+		for (int i = 0; i < amount; i++)
+		{
+			if (bk[i].getnumber() == number) { bk[i].output(); }
+		}
+		return;
+		cout << "该编号未加入图书查询系统！" << endl;
+	}break;
+	case 2:
+	{
+		cout << "请输入要查询的标题：" << endl;
+		string title;
+		cin >> title;
+		for (int i = 0; i < amount; i++)
+		{
+			if (bk[i].gettitle() == title) { bk[i].output(); }
+		}
+		return;
+		cout << "该标题未加入图书查询系统！" << endl;
+	}break;
+	case 3:
+	{
+		cout << "请输入要查询的作者：" << endl;
+		string author;
+		cin >> author;
+		for (int i = 0; i < amount; i++)
+		{
+			if (bk[i].getauthor() == author) { bk[i].output(); }
+		}
+		return;
+		cout << "该作品未加入图书查询系统！" << endl;
+	}break;
+	default:cout << "无此选项，请重试！" << endl; break;
+
+	}
+}
+void Bookinfo::save()
+{
+	ofstream outfile("图书.txt", ios::out);
+	if (!outfile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	cout << "打开成功！" << endl;
+	for (int i = 0; i < amount; i++)
+	{
+		outfile << bk[i].getnumber() << "   "
+			<< bk[i].gettitle() << "   "
+			<< bk[i].getauthor() << "   "
+			<< bk[i].getgraderank() << "   "
+			<< bk[i].getpress() << "   "
+			<< bk[i].getpage() << "   "
+			<< bk[i].getISBN() << "   " << endl;
+	}
+	cout << "写入成功！" << endl;
+	outfile.close();
+}
+void Bookinfo::show()
+{
+	if (amount = 0) { cout << "尚未导入数据！" << endl; return; }
+	cout << " 编号" << " " << "标题" << " " << "作者" << " " << "出版社" << " " << "页数" << " " << "ISBN" << endl;
+	for (int i = 0; i < amount; i++) { bk[i].output(); }
+}
+void Bookinfo::compile()
+{
+	if (amount = 0) { cout << "当前没有书籍记录！" << endl; return; }
+	int num;
+	cout << "请输入你要查询的编号：" << endl;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (bk[i].getnumber() == num)
+		{
+			cout << "请输入修改的信息" << endl;
+			bk[i].input();
+			cout << "修改成功！" << endl;
+			return;
+		}
+	}
+	cout << "您所查询的书籍不在库中！" << endl;
+}
+void Bookinfo::load()
+{
+	ifstream infile("书籍.txt", ios::in);
+	if (!infile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	int j = 0;
+	while (infile >> bk[j].number
+		>> bk[j].title
+		>> bk[j].author
+		>> bk[j].graderank
+		>> bk[j].press
+		>> bk[j].page
+		>> bk[j].ISBN)
+	{
+		j++;
+		amount++;
+	}
+	cout << "打开成功！" << endl;
+	infile.close();
+}
+class Disk :public Article
+{
+public:
+	string producer;
+	int year;
+	int timelength;
+public:
+	Disk(int num = 0, string tit = " ", string aut = " ", string pro = " ", int gr = 0, int ye = 0, int tl = 0) :
+		Article(num, tit, aut, gr), producer(pro), year(ye), timelength(tl) {};
+	void input();
+	void output();
+	string getproducer() { return producer; }
+	int getyear() { return year; }
+	int gettimelength() { return timelength; }
+};
+class Diskinfo
+{
+protected:
+	Disk disk[capacity];
+	int amount;
+
+public:
+	Diskinfo() { amount = 0; }
+	void add();
+	void deletes();
+	void show();
+	void compile();
+	void search();
+	void save();
+	void load();
+};
+void Disk::input()
+{
+	cout << "plz enter the number";
+	cin >> number;
+	cout << "plz enter the title";
+	cin >> title;
+	cout << "plz enter the author";
+	cin >> author;
+	cout << "plz enter the gr";
+	cin >> graderank;
+	cout << "plz enter the producer";
+	cin >> producer;
+	cout << "plz enter the year";
+	cin >> year;
+	cout << "plz enter the timelength";
+	cin >> timelength;
+}
+void Disk::output()
+{
+	cout << "编号：" << number;
+	cout << "标题：" << title;
+	cout << "作者：" << author;
+	cout << "评级：" << graderank;
+	cout << "出品人：" << producer;
+	cout << "出品年份：" << year;
+	cout << "视频时长：" << timelength;
+}
+void Diskinfo::add()
+{
+	if (amount >= capacity) { cout << "WARNING!媒体库已满！" << endl; return; }
+	Disk disks;
+	cout << "请输入添加视频的信息" << endl;
+	disks.input();
+	for (int i = 0; i < amount; i++)
+		if (disks.getnumber() == disk[i].getnumber())
+		{
+			cout << "该编号视频已存在！" << endl;
+			return;
+		}
+
+	disk[amount] = disks;
+	amount += 1;
+	cout << "添加成功！" << endl;
+}
+void Diskinfo::deletes()
+{
+	if (amount = 0) { cout << "当前没有视频记录！" << endl; return; }
+	cout << "请输入你要删除的编号！" << endl;
+	int num;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (disk[i].getnumber() == num)
+		{
+			cout << "是否删除？" << endl;
+			cout << "1.是 2.否" << endl;
+			int choice1;
+			cin >> choice1;
+			switch (choice1)
+			{
+			case 1:
+			{
+				for (int j = i; j < amount - 1; j++)
+				{
+					disk[j] = disk[j + 1];
+					cout << "删除成功！" << endl;
+					amount--;
+				}
+			}; break;
+			case 2:return;
+			default:cout << "不存在此选项！" << endl; break;
+			}return;
+		}
+	}
+	cout << "记录为空！" << endl;
+}
+void Diskinfo::search()
+{
+	if (amount == 0) { cout << "当前无视频记录！" << endl; return; }
+	int choice;
+	cout << "请选择查询方式：1.编号查询 2.标题查询 3.作者查询 " << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+	{
+		cout << "请输入要查询的编号：" << endl;
+		int number;
+		cin >> number;
+		for (int i = 0; i < amount; i++)
+		{
+			if (disk[i].getnumber() == number) { disk[i].output(); }
+		}
+		return;
+		cout << "该编号未加入视频查询系统！" << endl;
+	}break;
+	case 2:
+	{
+		cout << "请输入要查询的标题：" << endl;
+		string title;
+		cin >> title;
+		for (int i = 0; i < amount; i++)
+		{
+			if (disk[i].gettitle() == title) { disk[i].output(); }
+		}
+		return;
+		cout << "该标题未加入视频查询系统！" << endl;
+	}break;
+	case 3:
+	{
+		cout << "请输入要查询的作者：" << endl;
+		string author;
+		cin >> author;
+		for (int i = 0; i < amount; i++)
+		{
+			if (disk[i].getauthor() == author) { disk[i].output(); }
+		}
+		return;
+		cout << "该作品未加入视频查询系统！" << endl;
+	}break;
+	default:cout << "无此选项，请重试！" << endl; break;
+
+	}
+}
+void Diskinfo::save()
+{
+	ofstream outfile("视频.txt", ios::out);
+	if (!outfile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	cout << "打开成功！" << endl;
+	for (int i = 0; i < amount; i++)
+	{
+		outfile << disk[i].getnumber() << "   "
+			<< disk[i].gettitle() << "   "
+			<< disk[i].getauthor() << "   "
+			<< disk[i].getgraderank() << "   "
+			<< disk[i].getproducer() << "   "
+			<< disk[i].getyear() << "   "
+			<< disk[i].gettimelength() << "   " << endl;
+	}
+	cout << "写入成功！" << endl;
+	outfile.close();
+}
+void Diskinfo::show()
+{
+	if (amount = 0) { cout << "尚未导入数据！" << endl; return; }
+	cout << " 编号" << " " << "标题" << " " << "作者" << " " << "出品人" << " " << "出品年份" << " " << "视频时长" << endl;
+	for (int i = 0; i < amount; i++) { disk[i].output(); }
+}
+void Diskinfo::compile()
+{
+	if (amount = 0) { cout << "当前没有视频记录！" << endl; return; }
+	int num;
+	cout << "请输入你要查询的编号：" << endl;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (disk[i].getnumber() == num)
+		{
+			cout << "请输入修改的信息" << endl;
+			disk[i].input();
+			cout << "修改成功！" << endl;
+			return;
+		}
+	}
+	cout << "您所查询的视频不在库中！" << endl;
+}
+void Diskinfo::load()
+{
+	ifstream infile("视频.txt", ios::in);
+	if (!infile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	int j = 0;
+	while (infile >> disk[j].number
+		>> disk[j].title
+		>> disk[j].author
+		>> disk[j].graderank
+		>> disk[j].producer
+		>> disk[j].year
+		>> disk[j].timelength)
+	{
+		j++;
+		amount++;
+	}
+	cout << "打开成功！" << endl;
+	infile.close();
+}
+class Painting :public Article
+{
+public:
+	string nation;
+	int length;
+	int width;
+	Painting(int num = 0, string tit = " ", string aut = " ", string pro = " ", int gr = 0, string nati = " ", int leng = 0, int wid = 0) :
+		Article(num, tit, aut, gr), nation(nati), length(leng), width(wid) {};
+	void input();
+	void output();
+	string getnation() { return nation; }
+	int getlength() { return length; }
+	int getwidth() { return width; }
+
+};
+class Paintinginfo
+{
+protected:
+	Painting pain[capacity];
+	int amount;
+
+public:
+	Paintinginfo() { amount = 0; }
+	void add();
+	void deletes();
+	void show();
+	void compile();
+	void search();
+	void save();
+	void load();
+};
+void Painting::input()
+{
+	cout << "plz enter the number";
+	cin >> number;
+	cout << "plz enter the title";
+	cin >> title;
+	cout << "plz enter the author";
+	cin >> author;
+	cout << "plz enter the gr";
+	cin >> graderank;
+	cout << "plz enter the nation";
+	cin >> nation;
+	cout << "plz enter the length";
+	cin >> length;
+	cout << "plz enter the width";
+	cin >> width;
+}
+void Painting::output()
+{
+	cout << "编 号：" << number;
+	cout << "标题：" << title;
+	cout << "作者：" << author;
+	cout << "评级：" << graderank;
+	cout << "国家：" << nation;
+	cout << "作品长度：" << length;
+	cout << "作品宽度：" << width;
+}
+void Paintinginfo::add()
+{
+	if (amount >= capacity) { cout << "WARNING!媒体库已满！" << endl; return; }
+	Painting paintings;
+	cout << "请输入添加画图的信息" << endl;
+	paintings.input();
+	for (int i = 0; i < amount; i++)
+		if (paintings.getnumber() == pain[i].getnumber())
+		{
+			cout << "该编号画图已存在！" << endl;
+			return;
+		}
+
+	pain[amount] = paintings;
+	amount += 1;
+	cout << "添加成功！" << endl;
+}
+void Paintinginfo::deletes()
+{
+	if (amount = 0) { cout << "当前没有图画记录！" << endl; return; }
+	cout << "请输入你要删除的编号！" << endl;
+	int num;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (pain[i].getnumber() == num)
+		{
+			cout << "是否删除？" << endl;
+			cout << "1.是 2.否" << endl;
+			int choice1;
+			cin >> choice1;
+			switch (choice1)
+			{
+			case 1:
+			{
+				for (int j = i; j < amount - 1; j++)
+				{
+					pain[j] = pain[j + 1];
+					cout << "删除成功！" << endl;
+					amount--;
+				}
+			}; break;
+			case 2:return;
+			default:cout << "不存在此选项！" << endl; break;
+			}return;
+		}
+	}
+	cout << "记录为空！" << endl;
+}
+void Paintinginfo::search()
+{
+	if (amount == 0) { cout << "当前无画图记录！" << endl; return; }
+	int choice;
+	cout << "请选择查询方式：1.编号查询 2.标题查询 3.作者查询 " << endl;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+	{
+		cout << "请输入要查询的编号：" << endl;
+		int number;
+		cin >> number;
+		for (int i = 0; i < amount; i++)
+		{
+			if (pain[i].getnumber() == number) { pain[i].output(); }
+		}
+		return;
+		cout << "该编号未加入画图查询系统！" << endl;
+	}break;
+	case 2:
+	{
+		cout << "请输入要查询的标题：" << endl;
+		string title;
+		cin >> title;
+		for (int i = 0; i < amount; i++)
+		{
+			if (pain[i].gettitle() == title) { pain[i].output(); }
+		}
+		return;
+		cout << "该标题未加入画图查询系统！" << endl;
+	}break;
+	case 3:
+	{
+		cout << "请输入要查询的作者：" << endl;
+		string author;
+		cin >> author;
+		for (int i = 0; i < amount; i++)
+		{
+			if (pain[i].getauthor() == author) { pain[i].output(); }
+		}
+		return;
+		cout << "该作品未加入画图查询系统！" << endl;
+	}break;
+	default:cout << "无此选项，请重试！" << endl; break;
+
+	}
+}
+void Paintinginfo::save()
+{
+	ofstream outfile("视频.txt", ios::out);
+	if (!outfile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	cout << "打开成功！" << endl;
+	for (int i = 0; i < amount; i++)
+	{
+		outfile << pain[i].getnumber() << "   "
+			<< pain[i].gettitle() << "   "
+			<< pain[i].getauthor() << "   "
+			<< pain[i].getgraderank() << "   "
+			<< pain[i].getnation() << "   "
+			<< pain[i].getlength() << "   "
+			<< pain[i].getwidth() << "   " << endl;
+	}
+	cout << "写入成功！" << endl;
+	outfile.close();
+}
+void Paintinginfo::show()
+{
+	if (amount = 0) { cout << "尚未导入数据！" << endl; return; }
+	cout << " 编号" << " " << "标题" << " " << "作者" << " " << "国家" << " " << "作品长度" << " " << "作品宽度" << endl;
+	for (int i = 0; i < amount; i++) { pain[i].output(); }
+}
+void Paintinginfo::compile()
+{
+	if (amount = 0) { cout << "当前没有画图记录！" << endl; return; }
+	int num;
+	cout << "请输入你要查询的编号：" << endl;
+	cin >> num;
+	for (int i = 0; i < amount; i++)
+	{
+		if (pain[i].getnumber() == num)
+		{
+			cout << "请输入修改的信息" << endl;
+			pain[i].input();
+			cout << "修改成功！" << endl;
+			return;
+		}
+	}
+	cout << "您所查询的图画不在库中！" << endl;
+}
+void Paintinginfo::load()
+{
+	ifstream infile("画图.txt", ios::in);
+	if (!infile)
+	{
+		cout << "打开失败！" << endl;
+		return;
+	}
+	int j = 0;
+	while (infile >> pain[j].number
+		>> pain[j].title
+		>> pain[j].author
+		>> pain[j].graderank
+		>> pain[j].nation
+		>> pain[j].length
+		>> pain[j].width)
+	{
+		j++;
+		amount++;
+	}
+	cout << "打开成功！" << endl;
+	infile.close();
+}
+
+void bookMenu();
+void diskMenu();
+void paintingMenu();
+
+int main()
+{
+	int choice = 4;
+	while (choice != 0)
+	{
+		cout << "\n********************************\n" << endl;
+		cout << "      阿萌媒体管理系统\n" << endl;//选择主界面下面有两个子系统 一个是学生一个是教工
+		cout << "0.退出系统\n1.图书管理系统\n2.视频管理系统\n3.图画管理系统" << endl << endl;
+		cout << "请输入您的选择：" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:bookMenu(); break;
+		case 2:diskMenu(); break;
+		case 3:paintingMenu(); break;
+		case 0:cout << "您已退出系统" << endl; break;
+		default:cout << "不存在此选项！请重试！" << endl; break;
+		}
+		cout << "\n================欢迎您下次使用本系统================\n" << endl;
+		getchar();
+		return 0;
+	}
+}
+void bookMenu()
+{
+	Bookinfo books;
+	int choice = 8;
+	while (choice != 0)
+	{
+		cout << "\n********************************\n" << endl;
+		cout << "      阿萌图书管理系统\n" << endl;
+		cout << "0.退出\n1.添加\n2.查询\n3.显示\n4.编辑\n5.删除\n6.保存\n7.读取\n" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:books.add(); break;
+		case 2:books.search(); break;
+		case 3:books.show(); break;
+		case 4:books.compile(); break;
+		case 5:books.deletes(); break;
+		case 6:books.save(); break;
+		case 7:books.load(); break;
+		case 0:cout << "您已退出系统" << endl; break;
+		default:cout << "不存在此选项！请重试！" << endl; break;
+		}
+	}
+}
+void diskMenu()
+{
+	Diskinfo diskss;
+	int choice = 8;
+	while (choice != 0)
+	{
+		cout << "\n********************************\n" << endl;
+		cout << "      阿萌视频管理系统\n" << endl;
+		cout << "0.退出\n1.添加\n2.查询\n3.显示\n4.编辑\n5.删除\n6.保存\n7.读取\n" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:diskss.add(); break;
+		case 2:diskss.search(); break;
+		case 3:diskss.show(); break;
+		case 4:diskss.compile(); break;
+		case 5:diskss.deletes(); break;
+		case 6:diskss.save(); break;
+		case 7:diskss.load(); break;
+		case 0:cout << "您已退出系统" << endl; break;
+		default:cout << "不存在此选项！请重试！" << endl; break;
+		}
+	}
+}
+void paintingMenu()
+{
+	Paintinginfo pains;
+	int choice = 8;
+	while (choice != 0)
+	{
+		cout << "\n********************************\n" << endl;
+		cout << "      阿萌图画管理系统\n" << endl;
+		cout << "0.退出\n1.添加\n2.查询\n3.显示\n4.编辑\n5.删除\n6.保存\n7.读取\n" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:pains.add(); break;
+		case 2:pains.search(); break;
+		case 3:pains.show(); break;
+		case 4:pains.compile(); break;
+		case 5:pains.deletes(); break;
+		case 6:pains.save(); break;
+		case 7:pains.load(); break;
+		case 0:cout << "您已退出系统" << endl; break;
+		default:cout << "不存在此选项！请重试！" << endl; break;
+		}
+	}
+}
+
+

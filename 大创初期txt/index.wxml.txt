@@ -1,0 +1,13 @@
+ <!-- pages/admin/addcats/addcats.wxml-->
+<view>
+  <!-- 九宫格布局预览图片 -->
+  <view wx:for="{{[0,1,2]}}" wx:for-item="i">
+    <view style="flex-direction:row;display:flex;"><!-- 横排布局 -->
+      <view wx:for="{{imgTempPathArray}}" wx:for-item="tempPath" wx:for-index="index"><!-- 遍历数组 -->
+        <view wx:if="{{index>=i*3 && index<3*(i+1)}}" class="flex-item"><!-- 分段显示 -->
+          <image src="images//images/vip.jpg" style="height:240rpx;width:240rpx;"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

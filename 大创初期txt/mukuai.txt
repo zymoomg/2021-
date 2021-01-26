@@ -1,0 +1,78 @@
+<!-- 四宫格功能应用 -->
+<view class='content1'>
+      <view class='content-item' wx:for="{{contentImgUrls}}" wx:key="url" wx:for-item="item">
+        <!-- 图片 -->
+        <image src="{{item.url}}" class="slide-image" mode='scaleToFill'/>
+        <!-- 图片上的文字说明 -->
+        <view class='content-item-title'>
+          <text>{{item.title}}</text>
+        </view>
+      </view>
+    </view>
+
+
+
+
+
+
+.content-item{
+  width: 47%;
+  height: 280rpx;
+  background-color: red;
+  margin: 5px;
+  /* 绝对定位的父级必须要定位 */
+  position: relative;
+}
+
+.content-item-title{
+  position: absolute; /*绝对定位,文字覆盖图片上*/
+  color:gray;
+  bottom: 0px; /* 位置在父级元素底部 */
+  font-size: 17px;
+  width: 98%;
+  height: 100rpx; /* 设置容器高度,显示渐变的高度 */
+  text-align: center;
+  display: flex; /* flex布局,控制容器内文字元素在底部 */
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1% 1% 1% 1%;
+}
+
+.slide-image{
+  width: 100%;
+  height: 100%;
+}
+
+.content1{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+contentImgUrls:[
+      {
+        title:'👻失眠！',
+        url:'https://pic4.zhimg.com/v2-7dc4c06d503473ef934e58c3109611d2_r.jpg'
+    },
+      {
+        title:'🍳脱发！',
+        url:'https://pic3.zhimg.com/v2-2e02480c84eec0d656fc314241cf4c21_r.jpg'
+      },
+      {
+        title:'🧓皮肤诊断！',
+        url:'https://pic2.zhimg.com/v2-3c02c6387031de55f242bce2875e67d6_r.jpg'
+      },
+      {
+        title:'💊盲人按摩！',
+        url:'https://pic2.zhimg.com/v2-74a943e0daf8a4ad3cb57c469652d787_r.jpg'
+      }
+    ],

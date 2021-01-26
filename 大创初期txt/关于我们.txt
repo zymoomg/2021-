@@ -1,0 +1,7 @@
+<view>
+<text>健康卫生主题医疗小程序，旨在提供一个功能齐全的健康卫生平台为民众提供上乘服务和最新资讯。功能包括：医院药房定位查询；求助信息社区问答；安全卫生知识科普；传染病预防；志愿服务报名；食物卡路里与健身贴士。</text>
+</view>
+
+
+Label label = (Label)Master.FindControl("Label1");
+            Label2.Text = label.Text;
